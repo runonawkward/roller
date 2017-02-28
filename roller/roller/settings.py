@@ -11,7 +11,12 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from os.path import expanduser
+from envparse import Env
 
+env_file = expanduser("~") + os.sep + '.roller_env'
+env = Env()
+env.read_envfile(env_file)
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,8 +25,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '67q5ccdxan*tio5pm=#+kv710*2mp48#*e88zkenrt5u4yk+vp'
 
+
+SECRET_KEY = env('ROLLER_SECRET_KEY')
+DBPASSWORD = env('ROLLER_DB_PASSWORD')
+DBNAME = env('ROLLER_DB_NAME')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -76,9 +84,9 @@ WSGI_APPLICATION = 'roller.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'roller',
+        'NAME': DBNAME,
         'HOST': '127.0.0.1',
-        'PASSWORD': 'BleepBloop!23',
+        'PASSWORD': DBPASSWORD,
         'PORT': '5432',
     }
 }
