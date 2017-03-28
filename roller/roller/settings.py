@@ -39,7 +39,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'generator',
+    'userauth',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -100,7 +100,7 @@ PASSWORD_HASHER = [
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     ]
 
-AUTH_USER_MODEL = 'generator.User'
+AUTH_USER_MODEL = 'userauth.User'
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
