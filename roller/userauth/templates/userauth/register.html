@@ -1,0 +1,7 @@
+<form action="/login/confirmation/" method="POST" >
+  {% csrf_token %}
+  First Name:<input type="TEXT" name='firstname'></>
+  Last Name:<input type="TEXT" name='lastname'></>
+  Email: <input type="TEXT" name='email'></>
+  <input type="SUBMIT" value="Register" />
+</form>
