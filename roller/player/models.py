@@ -1,6 +1,7 @@
 from django.db import models
 from userauth.models import User
 
+
 class Character(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
@@ -10,6 +11,7 @@ class Character(models.Model):
     age = models.PositiveSmallIntegerField(default=20)
     level = models.PositiveSmallIntegerField(default=1)
 
+
 class Campaign(models.Model):
     master = models.ForeignKey(User, on_delete=models.CASCADE)
-    users = models.ManyToManyField(Character)
+    party = models.ManyToManyField(Character)
