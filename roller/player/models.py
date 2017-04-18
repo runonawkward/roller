@@ -15,21 +15,18 @@ class Ability(models.Model):
     name = models.CharField(max_length=20, primary_key=True)
 
 
-class AbilityRequirement(models.Model):
-    name = models.ForeignKey(Ability, on_delete=models.CASCADE)
-    value = models.PositiveSmallIntegerField(default=12)
-
-
 class Feat(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=255)
-
-
-class FeatRequirements(models.Model):
-    feat = models.ForeignKey(Feat, on_delete=models.CASCADE)
-    parents = models.ManyToManyField(Feat)
+    ancestors = models.ManyToManyField('self', related_name='ancestors', blank=True)
+    children = models.ManyToManyField('self', related_name='children', blank=True)
     class_features = models.ManyToManyField(ClassFeature)
-    abilities = models.ManyToManyField(AbilityRequirement)
+
+
+class AbilityRequirement(models.Model):
+    name = models.ForeignKey(Ability, on_delete=models.CASCADE)
+    value = models.PositiveSmallIntegerField(default=12)
+    feat_id = models.ForeignKey(Feat, related_name='feat_id', blank=True)
 
 
 class Character(models.Model):
@@ -57,4 +54,4 @@ class CharacterClass(models.Model):
 class Campaign(models.Model):
     master = models.ForeignKey(User, on_delete=models.CASCADE)
     party = models.ManyToManyField(Character)
-    description = models.CharField(max_length=100)
+    description = models.CharField(max_length=100, null=True, blank=True)
