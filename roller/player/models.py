@@ -43,7 +43,7 @@ class Character(models.Model):
 
 
 class CharacterAbility(models.Model):
-    name = models.ForeignKey(Ability, on_delete=models.CACADE)
+    name = models.ForeignKey(Ability, on_delete=models.CASCADE)
     value = models.PositiveIntegerField(default=7)
     character_id = models.ForeignKey(Character, on_delete=models.CASCADE)
 
